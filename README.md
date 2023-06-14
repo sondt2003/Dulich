@@ -1,7 +1,7 @@
 *Cài Server
-*Bước 1 vào folder SERVER_DU_LICH để setup
- #cd SERVER_DU_LICH
-#Bước 2 download các thư viện có trong package.json
+## Bước 1 vào folder SERVER_DU_LICH để setup
+## cd SERVER_DU_LICH
+##Bước 2 download các thư viện có trong package.json
  npm install
 Bước 3 chạy Server
  npm run start:dev
