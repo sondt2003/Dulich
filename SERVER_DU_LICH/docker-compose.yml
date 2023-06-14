@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15.0
+    container_name: database
+    networks:
+      - networkdulich
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 190011445
+      POSTGRES_DB: dulich 
+    volumes:
+       - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    # expose:
+    #     - 3306
+  nestjs:
+    container_name: nestjs
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks:
+      - networkdulich
+    ports:
+      - 3000:3000
+    # environment:
+    #   - DATABASE_URL="postgresql://postgres:190011445@host.docker.internal:5432/dulich?schema=public"
+
+networks:
+  networkdulich:

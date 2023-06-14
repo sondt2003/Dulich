@@ -1,0 +1,52 @@
+nest g module frontend --no-spec
+
+
+nest g module frontend/users --no-spec
+nest g module frontend/place --no-spec
+nest g module frontend/city --no-spec
+nest g module frontend/comment --no-spec
+nest g module frontend/travelEvent --no-spec
+nest g module frontend/vote --no-spec
+
+
+
+nest g controller frontend/users --no-spec
+nest g controller frontend/place --no-spec
+nest g controller frontend/city --no-spec
+nest g controller frontend/comment --no-spec
+nest g controller frontend/travelEvent --no-spec
+nest g controller frontend/vote --no-spec
+
+
+
+
+
+
+
+
+nest g module backend --no-spec
+
+
+nest g service backend/users --no-spec
+nest g service backend/place --no-spec
+nest g service backend/city --no-spec
+nest g service backend/comment --no-spec
+nest g service backend/travelEvent --no-spec
+nest g service backend/vote --no-spec
+
+
+nest g module backend/users --no-spec
+nest g module backend/place --no-spec
+nest g module backend/city --no-spec
+nest g module backend/comment --no-spec
+nest g module backend/travelEvent --no-spec
+nest g module backend/vote --no-spec
+
+
+
+nest g controller backend/users --no-spec
+nest g controller backend/place --no-spec
+nest g controller backend/city --no-spec
+nest g controller backend/comment --no-spec
+nest g controller backend/travelEvent --no-spec
+nest g controller backend/vote --no-spec

@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // provider = "postgresql"
+  provider = "sqlite"
+  // url      = env("DATABASE_URL")
+  url      = "file:./data/sqlite/dulich.sqlite"
+}
+
+model users {
+  id             Int      @id @unique @default(autoincrement())
+  email          String   @unique
+  account        String
+  password       String
+  fullname       String?
+  role           String   @default("user")
+  remember_token String
+  created_at     DateTime @default(now())
+  active         Boolean?  @default(true)
+  updated_at     DateTime @updatedAt
+
+  place   place[]   @relation("place")
+  city    city[]    @relation("city")
+  comment comment[] @relation("comment")
+  vote    vote[]    @relation("vote")
+}
+
+model place {
+  id          Int    @id @unique @default(autoincrement())
+  name        String @default("")
+  description String @default("")
+  address     String
+  image       String @default("https://tse1.mm.bing.net/th?id=OIP.4XB8NF1awQyApnQDDmBmQwHaEo&pid=Api&P=0&h=180")
+
+  users  users @relation("place", fields: [userID], references: [id])
+  userID Int //FK
+
+  city  city @relation("place", fields: [cityID], references: [id])
+  cityID Int //FK
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  comment     comment[]     @relation("comment")
+  travelEvent travelEvent[] @relation("travelEvent")
+  vote        vote[]        @relation("vote")
+}
+
+model comment {
+  id Int @id @unique @default(autoincrement())
+
+  users      users    @relation("comment", fields: [userID], references: [id])
+  userID     Int //
+  place      place    @relation("comment", fields: [placeID], references: [id])
+  placeID    Int //FK
+  cmt        String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model travelEvent {
+  id      Int   @id @unique @default(autoincrement())
+  place   place @relation("travelEvent", fields: [placeID], references: [id])
+  placeID Int //FK
+
+  event       String
+  description String
+  dateStart   DateTime
+  dateEnd     DateTime
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model vote {
+  id Int @id @unique @default(autoincrement())
+
+  users  users @relation("vote", fields: [userID], references: [id])
+  userID Int //FK
+
+  place   place @relation("vote", fields: [placeID], references: [id])
+  placeID Int //FK
+
+  created_at DateTime @default(now())
+}
+
+model city {
+  id   Int    @id @unique @default(autoincrement())
+  name String
+
+  users  users @relation("city", fields: [userID], references: [id])
+  userID Int //FK
+
+  created_at DateTime @unique @default(now())
+  updated_at DateTime @unique @updatedAt
+  place   place[]   @relation("place")
+}

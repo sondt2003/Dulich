@@ -1,0 +1,70 @@
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Users /</span> Data</h4>
+    <div class="card">
+      <h5 class="card-header">Table Users</h5>
+      <div class="table-responsive text-nowrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>name</th>
+              <th>Created at</th>
+              <th>Updated at</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            <% city.forEach(city=> { %>
+              <tr>
+                <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>
+                    <%= city.id %>
+                  </strong></td>
+                <td>
+                  <%= city.name %>
+                </td>
+                <td>
+                  <%= city.created_at.getFullYear()+ '-' + ('0'+(city.created_at.getMonth()+1)).slice(-2)+'-'+('0' +
+                    city.created_at.getDate()).slice(-2) %>
+                </td>
+                <td>
+                  <%= city.updated_at.getFullYear()+ '-' + ('0'+(city.updated_at.getMonth()+1)).slice(-2)+'-'+('0' +
+                    city.updated_at.getDate()).slice(-2) %>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                      <i class="bx bx-dots-vertical-rounded"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" onclick="clickCity('<%= city.id %>',this)" href="javascript:void(0);"><i
+                          class="bx bx-edit-alt me-2"></i>
+                        Edit</a>
+                        <a class="dropdown-item" onclick="clickPlace('<%= city.id %>',this)" href="javascript:void(0);"><i
+                          class="bx bx-edit-alt me-2"></i>
+                        List Place</a>
+                        <a class="dropdown-item" onclick="clickDelete('<%= city.id %>',this)" href="javascript:void(0);"><i class="bx bx-trash me-2"></i>
+                          Delete</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="content-backdrop fade"></div>
+</div>
+<script>
+  const clickCity = (id, data) => {
+    data.href = 'update/' + id;
+  }
+  const clickPlace = (id, data) => {
+    data.href = '/place/citys/' + id;
+  }
+  const clickDelete = (id, data) => {
+    data.href = 'delete/' + id;
+  }
+</script>

@@ -1,0 +1,71 @@
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Users /</span> Data</h4>
+    <div class="card">
+      <h5 class="card-header">Table Users</h5>
+      <div class="table-responsive text-nowrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>account</th>
+              <th>fullname</th>
+              <th>email</th>
+              <th>active</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            <% users.forEach(user=> { %>
+              <tr>
+                <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>
+                    <%= user.role %>
+                  </strong></td>
+                <td>
+                  <%= user.account %>
+                </td>
+                <td>
+                  <%= user.fullname %>
+                </td>
+                <td>
+                  <%= user.email %>
+                </td>
+                <td>
+                    <% if(user.active==true) { %>
+                      active
+                      <% } else { %>
+                        un Active
+                        <% } %>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                      <i class="bx bx-dots-vertical-rounded"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" onclick="clickTransaction('<%= user.id %>',this)" href="#"><i
+                          class="bx bx-edit-alt me-2"></i>
+                        Edit</a>
+                      <a class="dropdown-item" onclick="clickDelete('<%= user.id %>',this)"
+                        href="javascript:void(0);"><i class="bx bx-trash me-2"></i>
+                        Delete</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="content-backdrop fade"></div>
+</div>
+<script>
+  const clickTransaction = (id, data) => {
+    data.href = 'update/' + id;
+  }
+  const clickDelete = (id, data) => {
+    data.href = 'delete/' + id;
+  }
+</script>

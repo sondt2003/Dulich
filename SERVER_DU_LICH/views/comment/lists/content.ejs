@@ -1,0 +1,80 @@
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Users /</span> Data</h4>
+    <div class="card">
+      <h5 class="card-header">Table Users</h5>
+      <div class="table-responsive text-nowrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>userID</th>
+              <th>name</th>
+              <th>placeID</th>
+              <th>cmt</th>
+              <th>created_at</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            <% comments.forEach(comment=> { %>
+              <tr>
+                <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>
+                    <%= comment.id %>
+                  </strong></td>
+                <td>
+                  <%= comment.userID %>
+                </td>
+                <td>
+                  name
+                </td>
+                <td>
+                  <%= comment.placeID %>
+                </td>
+                <td>
+                  Place
+                </td>
+                <td>
+                  <%= comment.cmt %>
+                </td>
+                <td>
+                  <% if(comment.active) { %>
+                    <span class="badge bg-label-success me-1">Completed</span>
+                    <% } else { %>
+                      <span class="badge bg-label-success me-1">Push</span>
+                      <% } %>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                      <i class="bx bx-dots-vertical-rounded"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" onclick="clickUser('<%= comment.id%>',this)"
+                        href="javascript:void(0);"><i class="bx bx-edit-alt me-2"></i>
+                        Edit User Comment</a>
+                      <a class="dropdown-item" onclick="clickPlace('<%= comment.id%>',this)"
+                        href="javascript:void(0);"><i class="bx bx-trash me-2"></i>
+                        Edit Place comment</a>
+                      <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-2"></i>
+                        Delete</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="content-backdrop fade"></div>
+</div>
+<script>
+  const clickUser = (id, data) => {
+    data.href = '/users/update/' + id;
+  }
+  const clickPlace = (id, data) => {
+    data.href = '/place/update/' + id;
+  }
+</script>
